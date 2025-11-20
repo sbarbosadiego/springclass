@@ -5,6 +5,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import br.com.springclass.springclass.model.entities.Aluno;
 
-public interface AlunoRespository extends CrudRepository<Aluno, Integer>, PagingAndSortingRepository<Aluno, Integer>{
+public interface AlunoRepository extends CrudRepository<Aluno, Long>, PagingAndSortingRepository<Aluno, Long>{
 
 }
