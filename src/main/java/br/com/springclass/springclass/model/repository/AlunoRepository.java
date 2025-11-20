@@ -6,5 +6,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import br.com.springclass.springclass.model.entities.Aluno;
 
 public interface AlunoRepository extends CrudRepository<Aluno, Long>, PagingAndSortingRepository<Aluno, Long>{
+	
+	public Iterable<Aluno> findByNomeAlunoContaining(String nome);
 
 }

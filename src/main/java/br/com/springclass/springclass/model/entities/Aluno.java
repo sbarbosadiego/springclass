@@ -51,6 +51,14 @@ public class Aluno {
 		return dataCriacao;
 	}
 
+	public Long getCodigoAluno() {
+		return codigoAluno;
+	}
+
+	public void setCodigoAluno(Long codigoAluno) {
+		this.codigoAluno = codigoAluno;
+	}
+
 	public void setDataCriacao(LocalDateTime dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
