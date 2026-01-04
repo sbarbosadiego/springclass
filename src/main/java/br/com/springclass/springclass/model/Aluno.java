@@ -44,4 +44,8 @@ public class Aluno {
             this.telefone = dados.telefone();
         }
     }
+
+    public void inativar() {
+        this.status = false;
+    }
 }

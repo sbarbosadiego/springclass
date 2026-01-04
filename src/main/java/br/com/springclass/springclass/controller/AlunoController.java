@@ -35,5 +35,14 @@ public class AlunoController {
         aluno.atualizarCadastro(dados);
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity inativarAluno(@PathVariable Long id) {
+        var aluno = repository.getReferenceById(id);
+        aluno.inativar();
+        return ResponseEntity.ok(new DadosDetalhesAluno(aluno));
+    }
+
+
 
 }
