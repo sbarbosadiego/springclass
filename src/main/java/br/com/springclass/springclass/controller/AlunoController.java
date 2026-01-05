@@ -30,9 +30,10 @@ public class AlunoController {
 
     @PutMapping
     @Transactional
-    public void atualizarAluno(@RequestBody @Valid AlunoAtualizaDTO dados) {
+    public ResponseEntity atualizarAluno(@RequestBody @Valid AlunoAtualizaDTO dados) {
         var aluno = repository.getReferenceById(dados.id());
         aluno.atualizarCadastro(dados);
+        return ResponseEntity.ok(new DadosDetalhesAluno(aluno));
     }
 
     @DeleteMapping("/{id}")
@@ -43,6 +44,11 @@ public class AlunoController {
         return ResponseEntity.ok(new DadosDetalhesAluno(aluno));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity fichaAluno(@PathVariable Long id) {
+        var aluno = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhesAluno(aluno));
+    }
 
 
 }

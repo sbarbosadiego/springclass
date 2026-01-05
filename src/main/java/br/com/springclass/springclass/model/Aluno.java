@@ -43,6 +43,9 @@ public class Aluno {
         if (dados.telefone() != null) {
             this.telefone = dados.telefone();
         }
+        if (dados.status() != null) {
+            this.status = dados.status();
+        }
     }
 
     public void inativar() {

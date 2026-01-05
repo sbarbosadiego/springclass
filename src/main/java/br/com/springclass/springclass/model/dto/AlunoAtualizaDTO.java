@@ -10,6 +10,7 @@ public record AlunoAtualizaDTO(
         String nome,
         @Email
         String email,
-        String telefone
+        String telefone,
+        Boolean status
 ) {
 }
