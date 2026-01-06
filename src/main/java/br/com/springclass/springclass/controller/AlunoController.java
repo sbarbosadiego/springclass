@@ -8,6 +8,9 @@ import br.com.springclass.springclass.repository.AlunoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -48,6 +51,12 @@ public class AlunoController {
     public ResponseEntity fichaAluno(@PathVariable Long id) {
         var aluno = repository.getReferenceById(id);
         return ResponseEntity.ok(new DadosDetalhesAluno(aluno));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<DadosDetalhesAluno>> listarAlunos(@PageableDefault(size = 10, sort = {"id"}) Pageable paginacao) {
+        var pagina = repository.findAllByStatusTrue(paginacao).map(DadosDetalhesAluno::new);
+        return ResponseEntity.ok(pagina);
     }
 
 
