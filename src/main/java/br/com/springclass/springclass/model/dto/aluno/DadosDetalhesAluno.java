@@ -1,4 +1,4 @@
-package br.com.springclass.springclass.model.dto;
+package br.com.springclass.springclass.model.dto.aluno;
 
 import br.com.springclass.springclass.model.Aluno;
 

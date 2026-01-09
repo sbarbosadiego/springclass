@@ -1,7 +1,7 @@
 package br.com.springclass.springclass.model;
 
-import br.com.springclass.springclass.model.dto.AlunoAtualizaDTO;
-import br.com.springclass.springclass.model.dto.AlunoCadastroDTO;
+import br.com.springclass.springclass.model.dto.aluno.AlunoAtualizaDTO;
+import br.com.springclass.springclass.model.dto.aluno.AlunoCadastroDTO;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -25,10 +25,10 @@ public class Aluno {
     private String telefone;
     private Boolean status;
 
-    public Aluno(AlunoCadastroDTO dados) {
-        this.nome = dados.nome();
-        this.email = dados.email();
-        this.telefone = dados.telefone();
+    public Aluno(AlunoCadastroDTO alunoDTO) {
+        this.nome = alunoDTO.nome();
+        this.email = alunoDTO.email();
+        this.telefone = alunoDTO.telefone();
         this.status =  true;
     }
 

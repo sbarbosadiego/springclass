@@ -1,9 +1,9 @@
 package br.com.springclass.springclass.controller;
 
 import br.com.springclass.springclass.model.Aluno;
-import br.com.springclass.springclass.model.dto.AlunoAtualizaDTO;
-import br.com.springclass.springclass.model.dto.AlunoCadastroDTO;
-import br.com.springclass.springclass.model.dto.DadosDetalhesAluno;
+import br.com.springclass.springclass.model.dto.aluno.AlunoAtualizaDTO;
+import br.com.springclass.springclass.model.dto.aluno.AlunoCadastroDTO;
+import br.com.springclass.springclass.model.dto.aluno.DadosDetalhesAluno;
 import br.com.springclass.springclass.repository.AlunoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -54,7 +54,7 @@ public class AlunoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DadosDetalhesAluno>> listarAlunos(@PageableDefault(size = 10, sort = {"id"}) Pageable paginacao) {
+    public ResponseEntity<Page<DadosDetalhesAluno>> listarAlunos(@PageableDefault(size = 20, sort = {"id"}) Pageable paginacao) {
         var pagina = repository.findAllByStatusTrue(paginacao).map(DadosDetalhesAluno::new);
         return ResponseEntity.ok(pagina);
     }

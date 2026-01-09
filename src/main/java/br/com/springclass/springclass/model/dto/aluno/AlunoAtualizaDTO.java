@@ -1,4 +1,4 @@
-package br.com.springclass.springclass.model.dto;
+package br.com.springclass.springclass.model.dto.aluno;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
