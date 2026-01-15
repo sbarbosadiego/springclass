@@ -1,6 +1,7 @@
 package br.com.springclass.springclass.controller;
 
 import br.com.springclass.springclass.model.Curso;
+import br.com.springclass.springclass.model.dto.curso.CursoAtualizaDTO;
 import br.com.springclass.springclass.model.dto.curso.CursoCadastroDTO;
 import br.com.springclass.springclass.model.dto.curso.DadosDetalhesCurso;
 import br.com.springclass.springclass.repository.CursoRepository;
@@ -8,10 +9,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
@@ -28,6 +26,14 @@ public class CursoController {
         repository.save(curso);
         var uri = uriComponentsBuilder.path("/cursos/{id}").buildAndExpand(curso.getId()).toUri();
         return ResponseEntity.created(uri).body(new DadosDetalhesCurso(curso));
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity atualizarCurso(@RequestBody @Valid CursoAtualizaDTO dados) {
+        var curso = repository.getReferenceById(dados.id());
+        curso.atualizarCadastro(dados);
+        return ResponseEntity.ok(new DadosDetalhesCurso(curso));
     }
 
 }
