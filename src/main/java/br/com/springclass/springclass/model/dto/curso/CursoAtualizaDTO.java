@@ -6,9 +6,7 @@ import jakarta.validation.constraints.NotNull;
 public record CursoAtualizaDTO(
         @NotNull
         Long id,
-        @NotBlank
         String curso,
-        @NotBlank
         String descricao,
         Boolean status
 ) {
