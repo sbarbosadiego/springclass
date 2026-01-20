@@ -9,6 +9,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Table(name = "alunos")
 @Entity(name = "Aluno")
 @Getter
@@ -24,6 +26,9 @@ public class Aluno {
     private String email;
     private String telefone;
     private Boolean status;
+
+    @OneToMany(mappedBy = "aluno")
+    private List<Matricula> matriculas;
 
     public Aluno(AlunoCadastroDTO alunoDTO) {
         this.nome = alunoDTO.nome();

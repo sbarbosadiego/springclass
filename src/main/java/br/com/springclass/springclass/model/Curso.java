@@ -9,6 +9,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Table(name = "cursos")
 @Entity(name = "curso")
 @Getter
@@ -23,6 +25,10 @@ public class Curso {
     private String curso;
     private String descricao;
     private Boolean status;
+
+    @OneToMany(mappedBy = "curso")
+    private List<Matricula> matriculas;
+
 
     public Curso(CursoCadastroDTO cursoDTO) {
         this.curso = cursoDTO.curso();
