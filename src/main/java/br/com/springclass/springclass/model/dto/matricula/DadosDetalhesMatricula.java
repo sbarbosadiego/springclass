@@ -11,11 +11,11 @@ public record DadosDetalhesMatricula(
         LocalDateTime dataMatricula,
         Boolean status
 ) {
-    public DadosDetalhesMatricula(Matricula m) {
-        this(m.getId(),
-                m.getAluno().getId(),
-                m.getCurso().getId(),
-                m.getDataMatricula(),
-                m.getStatus());
+    public DadosDetalhesMatricula(Matricula matricula) {
+        this(matricula.getId(),
+                matricula.getAluno().getId(),
+                matricula.getCurso().getId(),
+                matricula.getDataMatricula(),
+                matricula.getStatus());
     }
 }

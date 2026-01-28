@@ -48,7 +48,7 @@ public class Matricula {
         }
     }
 
-    public void cancelar() {
+    public void inativar() {
         this.status = false;
     }
 

@@ -1,20 +1,21 @@
 package br.com.springclass.springclass.controller;
 
 import br.com.springclass.springclass.model.Matricula;
-import br.com.springclass.springclass.model.dto.curso.DadosDetalhesCurso;
+import br.com.springclass.springclass.model.dto.aluno.DadosDetalhesAluno;
 import br.com.springclass.springclass.model.dto.matricula.DadosDetalhesMatricula;
+import br.com.springclass.springclass.model.dto.matricula.MatriculaAtualizaDTO;
 import br.com.springclass.springclass.model.dto.matricula.MatriculaCadastroDTO;
 import br.com.springclass.springclass.repository.AlunoRepository;
 import br.com.springclass.springclass.repository.CursoRepository;
 import br.com.springclass.springclass.repository.MatriculaRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
@@ -39,6 +40,28 @@ public class MatriculaController {
         matriculaRepository.save(matricula);
         var uri = uriComponentsBuilder.path("matriculas/{/id}").buildAndExpand(matricula.getId()).toUri();
         return ResponseEntity.created(uri).body(new DadosDetalhesMatricula(matricula));
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity atualizarMatricula(@RequestBody @Valid MatriculaAtualizaDTO dados) {
+        var matricula = matriculaRepository.getReferenceById(dados.id());
+        matricula.atualizarMatricula(dados);
+        return ResponseEntity.ok(new DadosDetalhesMatricula(matricula));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity inativarMatricula(@PathVariable Long id) {
+        var matricula = matriculaRepository.getReferenceById(id);
+        matricula.inativar();
+        return ResponseEntity.ok(new DadosDetalhesMatricula(matricula));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity fichaMatricula(@PathVariable Long id) {
+        var matricula = matriculaRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhesMatricula(matricula));
     }
 
 }
