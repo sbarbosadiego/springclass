@@ -10,8 +10,8 @@ import br.com.springclass.springclass.repository.CursoRepository;
 import br.com.springclass.springclass.repository.MatriculaRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -62,6 +62,12 @@ public class MatriculaController {
     public ResponseEntity fichaMatricula(@PathVariable Long id) {
         var matricula = matriculaRepository.getReferenceById(id);
         return ResponseEntity.ok(new DadosDetalhesMatricula(matricula));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<DadosDetalhesMatricula>> listarMatriculas(@PageableDefault(size = 20, sort = {"id"}) Pageable paginacao) {
+        var pagina = matriculaRepository.findAllByStatusTrue(paginacao).map(DadosDetalhesMatricula::new);
+        return ResponseEntity.ok(pagina);
     }
 
 }
